@@ -1,25 +1,27 @@
-use std::io::{stdin, BufRead};
-
-pub fn day1() -> u32 {
-    let std_in = stdin();
-    let mut calibration_value: Vec<u32> = vec![];
-    for line in std_in.lock().lines() {
-        match line {
-            Ok(line) => {
-                if line.is_empty() {
-                    break;
-                } else {
-                    calibration_value.push(find_first_and_last_digit(&line));
-                }
-            }
-            Err(error) => println!("Error: {}", error),
-        }
-    }
-
-    return calibration_value.iter().sum::<u32>();
+#[test]
+fn test() {
+    run(String::from(
+        "two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen",
+    ));
 }
 
-fn find_first_and_last_digit(input: &str) -> u32 {
+pub fn run(input: String) {
+    let calibration_value = input
+        .lines()
+        .map(|line| find_first_and_last_digit(&line))
+        .collect::<Vec<usize>>();
+
+    let result = calibration_value.iter().sum::<usize>();
+    println!("Result: {}", result);
+}
+
+fn find_first_and_last_digit(input: &str) -> usize {
     let input_substr: Vec<&str> = input.split_inclusive(|c: char| c.is_digit(10)).collect();
     let mut digit_chars: Vec<char> = vec![];
     let digit_mapping = [
@@ -79,6 +81,6 @@ fn find_first_and_last_digit(input: &str) -> u32 {
     return [digit_chars[0], digit_chars[digit_chars.len() - 1]]
         .iter()
         .collect::<String>()
-        .parse::<u32>()
+        .parse::<usize>()
         .unwrap();
 }
