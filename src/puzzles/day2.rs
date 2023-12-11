@@ -2,16 +2,17 @@ use std::collections::HashMap;
 
 #[test]
 fn test() {
-    run(String::from(
+    let result = run(String::from(
         "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
         Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
         Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
         Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
         Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
     ));
+    assert_eq!(result, 2286);
 }
 
-pub fn run(input: String) {
+pub fn run(input: String) -> usize {
     let max_red: usize = 12;
     let max_green: usize = 13;
     let max_blue: usize = 14;
@@ -23,6 +24,7 @@ pub fn run(input: String) {
 
     let result = filtered_input.iter().sum::<usize>();
     println!("Result: {}", result);
+    return result;
 }
 
 fn part_1(input: &str, max_red: usize, max_green: usize, max_blue: usize) -> usize {

@@ -1,6 +1,6 @@
 #[test]
 fn test() {
-    run(String::from(
+    let result = run(String::from(
         "two1nine
 eightwothree
 abcone2threexyz
@@ -9,9 +9,10 @@ xtwone3four
 zoneight234
 7pqrstsixteen",
     ));
+    assert_eq!(result, 281);
 }
 
-pub fn run(input: String) {
+pub fn run(input: String) -> usize {
     let calibration_value = input
         .lines()
         .map(|line| find_first_and_last_digit(&line))
@@ -19,6 +20,7 @@ pub fn run(input: String) {
 
     let result = calibration_value.iter().sum::<usize>();
     println!("Result: {}", result);
+    return result;
 }
 
 fn find_first_and_last_digit(input: &str) -> usize {

@@ -18,6 +18,9 @@ fn main() {
                 "day2" => {
                     day2::run(data);
                 }
+                "day3" => {
+                    day3::run(data);
+                }
                 _ => {
                     panic!("Invalid day");
                 }
